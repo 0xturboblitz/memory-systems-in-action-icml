@@ -94,16 +94,12 @@ class StellaV5Adapter:
 
         # Pre-compute embeddings for all chunks
         print(f"Embedding {len(all_chunks)} chunks from {len(self.session_data)} sessions...")
-
-        # Use multi-process pool for faster CPU encoding
-        pool = self.model.start_multi_process_pool()
-        self.chunk_embeddings = self.model.encode_multi_process(
+        self.chunk_embeddings = self.model.encode(
             all_chunks,
-            pool,
-            show_progress_bar=False
+            show_progress_bar=True,
+            convert_to_numpy=True,
+            batch_size=64  # Larger batches for better CPU throughput
         )
-        self.model.stop_multi_process_pool(pool)
-
         print("Embeddings ready.")
 
     def get_tools(self) -> List[Dict[str, Any]]:
