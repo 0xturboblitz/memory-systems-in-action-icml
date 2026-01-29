@@ -1,5 +1,7 @@
 """
-Hybrid Adapter: Keyword search + embedding reranking
+Hybrid Adapter: Reciprocal Rank Fusion (RRF) of keyword + embedding search.
+
+Standard hybrid retrieval: run both retrievers in parallel, fuse with RRF.
 """
 import json
 import numpy as np
@@ -7,38 +9,54 @@ from pathlib import Path
 from typing import Any, Dict, List
 from sentence_transformers import SentenceTransformer
 
+RRF_K = 60  # Standard RRF constant
+
 
 class HybridAdapter:
     """
-    Hybrid adapter combining keyword search (recall) + embedding reranking (precision).
-    Strategy: MCP keyword search retrieves top-10, then Stella V5 reranks to top-3.
+    Hybrid adapter using Reciprocal Rank Fusion (RRF) of keyword + embedding search.
+    Both retrievers run in parallel, results fused with RRF(k=60).
     """
     def __init__(self, data_dir: Path):
         self.data_dir = data_dir
         self.env_dir = None
         self.model = None
         self.session_data = []
+        self.session_texts = []
+        self.session_embeddings = None
 
     def _load_model(self):
         """Lazy load Stella V5 model"""
         if self.model is None:
-            print("Loading Stella V5 for reranking...")
+            print("Loading Stella V5 for hybrid retrieval...")
             self.model = SentenceTransformer('dunzhang/stella_en_1.5B_v5')
             print("Model ready.")
 
     def set_environment(self, env_dir: Path):
-        """Set the current question environment"""
+        """Set the current question environment and pre-compute embeddings"""
         self.env_dir = env_dir
+        self._load_model()
 
-        # Load all sessions (no pre-embedding - we'll embed on-demand)
         chat_history_dir = self.env_dir / "chat_history"
         session_files = sorted(chat_history_dir.glob("*.json"))
 
         self.session_data = []
+        self.session_texts = []
         for session_file in session_files:
             with open(session_file) as f:
                 data = json.load(f)
                 self.session_data.append(data)
+                text_parts = [turn.get("content", "") for turn in data.get("turns", [])]
+                self.session_texts.append(" ".join(text_parts))
+
+        # Pre-compute embeddings for dense retrieval
+        if self.session_texts:
+            self.session_embeddings = self.model.encode(
+                self.session_texts,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+                normalize_embeddings=True
+            )
 
     def get_tools(self) -> List[Dict[str, Any]]:
         """Return OpenAI function calling tool definitions"""
@@ -47,7 +65,7 @@ class HybridAdapter:
                 "type": "function",
                 "function": {
                     "name": "search_memory",
-                    "description": "Search conversation history using hybrid keyword + semantic reranking. Returns top matching sessions.",
+                    "description": "Search conversation history using RRF hybrid (keyword + embedding fusion). Returns top matching sessions.",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -77,76 +95,45 @@ class HybridAdapter:
 
     def _search_memory(self, query: str, top_k: int = 3) -> str:
         """
-        Hybrid retrieval:
-        1. Keyword search (MCP-style) to get top-10 candidates
-        2. Embed query + candidates
-        3. Rerank by cosine similarity
-        4. Return top-k
+        Hybrid retrieval with Reciprocal Rank Fusion (RRF):
+        1. Keyword search → ranking
+        2. Embedding search → ranking
+        3. Fuse with RRF: score(d) = 1/(k+rank_kw) + 1/(k+rank_emb)
         """
         if not self.env_dir or len(self.session_data) == 0:
             return "Error: Environment not set"
 
-        # Step 1: Keyword search (MCP-style) for recall
+        n = len(self.session_data)
+
+        # Keyword ranking
         keywords = set(query.lower().split())
+        kw_scores = []
+        for idx, text in enumerate(self.session_texts):
+            score = sum(text.lower().count(kw) for kw in keywords)
+            kw_scores.append((score, idx))
+        kw_scores.sort(reverse=True, key=lambda x: x[0])
+        kw_rank = {idx: rank for rank, (_, idx) in enumerate(kw_scores)}
 
-        scored_sessions = []
-        for idx, session_data in enumerate(self.session_data):
-            # Create text representation
-            text_parts = []
-            for turn in session_data.get("turns", []):
-                content = turn.get("content", "")
-                text_parts.append(content)
+        # Embedding ranking
+        query_emb = self.model.encode(
+            query, show_progress_bar=False, convert_to_numpy=True, normalize_embeddings=True
+        )
+        emb_scores = np.dot(self.session_embeddings, query_emb)
+        emb_rank = {idx: rank for rank, idx in enumerate(np.argsort(-emb_scores))}
 
-            session_text = " ".join(text_parts).lower()
+        # RRF fusion
+        rrf_scores = []
+        for idx in range(n):
+            rrf = 1.0 / (RRF_K + kw_rank[idx]) + 1.0 / (RRF_K + emb_rank[idx])
+            rrf_scores.append((rrf, idx))
+        rrf_scores.sort(reverse=True, key=lambda x: x[0])
 
-            # Score by keyword frequency
-            score = sum(session_text.count(kw) for kw in keywords)
-            if score > 0:
-                scored_sessions.append((score, idx, session_data, session_text))
-
-        if not scored_sessions:
-            return f"No sessions found matching: {query}"
-
-        # Get top-10 candidates (or all if fewer)
-        scored_sessions.sort(reverse=True, key=lambda x: x[0])
-        candidates = scored_sessions[:min(10, len(scored_sessions))]
-
-        # Step 2: Rerank with embeddings for precision
-        if len(candidates) > top_k:
-            self._load_model()
-
-            # Embed query
-            query_embedding = self.model.encode(
-                query,
-                show_progress_bar=False,
-                convert_to_numpy=True,
-                normalize_embeddings=True
-            )
-
-            # Embed candidate sessions
-            candidate_texts = [c[3] for c in candidates]
-            candidate_embeddings = self.model.encode(
-                candidate_texts,
-                show_progress_bar=False,
-                convert_to_numpy=True,
-                normalize_embeddings=True
-            )
-
-            # Compute cosine similarity
-            similarities = np.dot(candidate_embeddings, query_embedding)
-
-            # Rerank by similarity
-            reranked_indices = np.argsort(similarities)[-top_k:][::-1]
-            top_sessions = [candidates[i] for i in reranked_indices]
-        else:
-            # If candidates <= top_k, no need to rerank
-            top_sessions = candidates[:top_k]
-
-        # Format results
-        lines = [f"Found {len(scored_sessions)} matching session(s). Showing top {len(top_sessions)} (hybrid ranked):", ""]
-        for score, idx, session_data, _ in top_sessions:
+        # Return top-k
+        top_indices = [idx for _, idx in rrf_scores[:top_k]]
+        lines = [f"Found {n} session(s). Showing top {len(top_indices)} (RRF hybrid):", ""]
+        for idx in top_indices:
             lines.append("=" * 60)
-            lines.append(self._format_session(session_data))
+            lines.append(self._format_session(self.session_data[idx]))
 
         return "\n".join(lines)
 

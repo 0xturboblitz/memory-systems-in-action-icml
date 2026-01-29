@@ -1,0 +1,11 @@
+{
+  "memory_type": "stella_v5",
+  "filesystem_enabled": false,
+  "num_questions": 5,
+  "accuracy": 0.2,
+  "avg_time_seconds": 10.909254312515259,
+  "avg_tokens": 8124.8,
+  "total_cost_usd": 0.10268499999999998,
+  "avg_iterations": 2.0,
+  "timestamp": "20260128_205903"
+}

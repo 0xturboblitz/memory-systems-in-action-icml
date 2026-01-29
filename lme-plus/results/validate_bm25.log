@@ -1,0 +1,22 @@
+Uninstalled 1 package in 917ms
+Installed 1 package in 154ms
+Loaded 3 questions
+
+[1/3] Question: e47becba
+  Answer: You graduated with a degree in Business Administration.
+  Correct: True
+  Time: 4.1s, Tokens: 10078, Cost: $0.0254
+
+[2/3] Question: 51a45a95
+  Answer: You redeemed a $5 coupon on coffee creamer last Sunday, which you discovered in your email inbox.
+  Correct: False
+  Time: 2.9s, Tokens: 8631, Cost: $0.0219
+
+[3/3] Question: 58bf7951
+  Answer: You attended a production of "The Glass Menagerie" at the local community theater.
+  Correct: True
+  Time: 1.8s, Tokens: 4400, Cost: $0.0113
+
+============================================================
+Results saved to results/validate_bm25/results_20260128_174405.json
+Summary: Accuracy=66.67%, Cost=$0.06

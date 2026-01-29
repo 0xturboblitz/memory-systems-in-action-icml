@@ -1,0 +1,11 @@
+{
+  "memory_type": "bge",
+  "filesystem_enabled": false,
+  "num_questions": 50,
+  "accuracy": 0.76,
+  "avg_time_seconds": 3.776938500404358,
+  "avg_tokens": 8472.34,
+  "total_cost_usd": 1.0738025,
+  "avg_iterations": 2.0,
+  "timestamp": "20260128_201706"
+}

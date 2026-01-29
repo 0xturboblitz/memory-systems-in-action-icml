@@ -1,0 +1,33 @@
+Uninstalled 1 package in 970ms
+Installed 1 package in 351ms
+None of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Traceback (most recent call last):
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/code/main.py", line 16, in <module>
+    from adapters.stella_v5 import StellaV5Adapter
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/code/adapters/stella_v5.py", line 11, in <module>
+    from sentence_transformers import SentenceTransformer
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/__init__.py", line 10, in <module>
+    from sentence_transformers.backend import (
+    ...<3 lines>...
+    )
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/backend/__init__.py", line 3, in <module>
+    from .load import load_onnx_model, load_openvino_model
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/backend/load.py", line 7, in <module>
+    from transformers.configuration_utils import PretrainedConfig
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/configuration_utils.py", line 27, in <module>
+    from .modeling_gguf_pytorch_utils import load_gguf_checkpoint
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/modeling_gguf_pytorch_utils.py", line 22, in <module>
+    from .integrations import (
+    ...<3 lines>...
+    )
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/integrations/__init__.py", line 149, in <module>
+    if not is_torch_greater_or_equal("2.3"):
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/utils/import_utils.py", line 1263, in is_torch_greater_or_equal
+    return version.parse(importlib.metadata.version("torch")) >= version.parse(library_version)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/packaging/version.py", line 103, in parse
+    return Version(version)
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/packaging/version.py", line 359, in __init__
+    match = self._regex.fullmatch(version)
+TypeError: expected string or bytes-like object, got 'NoneType'

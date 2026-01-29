@@ -1,0 +1,37 @@
+Uninstalled 1 package in 2.02s
+Installed 1 package in 277ms
+Traceback (most recent call last):
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/code/main.py", line 16, in <module>
+    from adapters.stella_v5 import StellaV5Adapter
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/code/adapters/stella_v5.py", line 11, in <module>
+    from sentence_transformers import SentenceTransformer
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/__init__.py", line 10, in <module>
+    from sentence_transformers.backend import (
+    ...<3 lines>...
+    )
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/backend/__init__.py", line 3, in <module>
+    from .load import load_onnx_model, load_openvino_model
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/sentence_transformers/backend/load.py", line 7, in <module>
+    from transformers.configuration_utils import PretrainedConfig
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/__init__.py", line 27, in <module>
+    from . import dependency_versions_check
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/dependency_versions_check.py", line 16, in <module>
+    from .utils.versions import require_version, require_version_core
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/utils/__init__.py", line 24, in <module>
+    from .auto_docstring import (
+    ...<10 lines>...
+    )
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/utils/auto_docstring.py", line 30, in <module>
+    from .generic import ModelOutput
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/utils/generic.py", line 34, in <module>
+    from .import_utils import (
+    ...<6 lines>...
+    )
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/transformers/utils/import_utils.py", line 251, in <module>
+    _torch_available = version.parse(_torch_version) >= version.parse("2.1.0")
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/packaging/version.py", line 103, in parse
+    return Version(version)
+  File "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/lme-plus/.venv/lib/python3.13/site-packages/packaging/version.py", line 359, in __init__
+    match = self._regex.fullmatch(version)
+TypeError: expected string or bytes-like object, got 'NoneType'

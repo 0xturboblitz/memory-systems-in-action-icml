@@ -39,11 +39,11 @@ Based on [Letta's finding](https://www.letta.com/blog/benchmarking-ai-agent-memo
 
 ### Memory Methods Under Test
 
-| ID | Method           | Memory | Filesystem | Compression |
-| -- | ---------------- | ------ | ---------- | ----------- |
-| A  | Built-in MCP     | ✅      | ❌          | ❌           |
-| B  | Stella v5 MCP    | ✅      | ❌          | ❌           |
-| C  | MCP + Filesystem | ✅      | ✅          | ❌           |
+| ID | Method              | Memory | Filesystem | Compression |
+| -- | ------------------- | ------ | ---------- | ----------- |
+| A  | Keyword (BM25)      | ✅      | ❌          | ❌           |
+| B  | Stella v5 (Dense)   | ✅      | ❌          | ❌           |
+| C  | Keyword + Filesystem| ✅      | ✅          | ❌           |
 | D  | Filesystem only  | ❌      | ✅          | ❌           |
 | E  | Compression      | ❌      | ❌          | ✅           |
 | O  | Oracle           | Gold   | ❌          | ❌           |
@@ -67,7 +67,7 @@ Based on [Letta's finding](https://www.letta.com/blog/benchmarking-ai-agent-memo
 | ID    | Method                     | QA Score   | Time (s) | Tokens | Cost  | vs LME (72%) |
 | ----- | -------------------------- | ---------- | -------- | ------ | ----- | ------------ |
 | **O** | **Oracle (Gold)**          | **90%**    | 1.7      | 3,344  | $0.44 | **+18pp**    |
-| **A** | **Built-in MCP (Keyword)** | **62%**    | 3.8      | 12,823 | $1.62 | **-10pp**    |
+| **A** | **Keyword (BM25)**         | **62%**    | 3.8      | 12,823 | $1.62 | **-10pp**    |
 | **B** | **Stella V5 (Dense)**      | **26%** 🔴 | 2.4      | 6,444  | $0.82 | **-46pp**    |
 | **D** | **Filesystem only**        | **32%**    | 2.4      | 2,639  | $0.35 | **-40pp**    |
 
@@ -75,31 +75,31 @@ Based on [Letta's finding](https://www.letta.com/blog/benchmarking-ai-agent-memo
 
 * ✅ Oracle establishes 90% ceiling (not 100% due to judge/agent errors)
 
-* ✅ MCP achieves 62%, close to LME target of 67% (-5pp)
+* ✅ Keyword search achieves 62%, close to LME target of 67% (-5pp)
 
 * 🔴 **SHOCKING:** Stella V5 (dense) = 26%, same as Filesystem! Dense embeddings FAILED
 
 * ❌ Filesystem fails at 32% (no semantic search)
 
-* 💡 28pp gap (Oracle vs MCP) = retrieval quality bottleneck
+* 💡 28pp gap (Oracle vs keyword) = retrieval quality bottleneck
 
-* 💡 Keyword search (MCP) >> Dense embeddings (Stella V5) by 36pp!
+* 💡 Keyword search >> Dense embeddings (Stella V5) by 36pp!
 
 ### Hypothesis Validation
 
 | Hypothesis               | Result          | Evidence                                                   |
 | ------------------------ | --------------- | ---------------------------------------------------------- |
-| **H1: Translation**      | ✅ **SUPPORTED** | MCP 62% ≈ 67% target (within 5pp)                          |
-| **H2: Method Ranking**   | ❌ **REJECTED**  | MCP (62%) >> Filesystem (26%) by 36pp                      |
+| **H1: Translation**      | ✅ **SUPPORTED** | Keyword 62% ≈ 67% target (within 5pp)                      |
+| **H2: Method Ranking**   | ❌ **REJECTED**  | Keyword (62%) >> Filesystem (26%) by 36pp                  |
 | **H3: Retrieval Gating** | ✅ **VALIDATED** | 28pp gap (90% vs 62%) confirms retrieval gates performance |
 
 ### Cost-Accuracy Analysis
 
 ```text
-Oracle: 90% @ $0.44 [Best accuracy, lowest cost] MCP: 62% @ $1.53 [3.5x Oracle cost, -28pp accuracy] Filesystem: 26% @ $0.36 [Similar cost to Oracle, -64pp accuracy]
+Oracle: 90% @ $0.44 [Best accuracy, lowest cost] Keyword: 62% @ $1.53 [3.5x Oracle cost, -28pp accuracy] Filesystem: 26% @ $0.36 [Similar cost to Oracle, -64pp accuracy]
 ```
 
-**Paradox:** MCP is most expensive despite lower accuracy (retrieves top-k sessions → inflated context)
+**Paradox:** Keyword search is most expensive despite lower accuracy (retrieves top-k sessions → inflated context)
 
 ***
 
@@ -119,7 +119,7 @@ ReAct agent with tools for memory queries and/or filesystem access.
 
 ### Evaluation
 
-* 500 questions from LongMemEval_S
+* 50 questions sampled from 442 available in LongMemEval_S
 
 * LLM judge (GPT-4o) for answer correctness
 
@@ -135,7 +135,7 @@ ReAct agent with tools for memory queries and/or filesystem access.
 | Hardware         | MacBook Pro M4 Max, 64GB                                 |
 | Initial Budget   | $10                                                      |
 | Validation Set   | 20 questions                                             |
-| Priority Methods | Filesystem, Built-in MCP, Oracle                         |
+| Priority Methods | Filesystem, Keyword (BM25), Oracle                       |
 
 ## References
 
@@ -144,11 +144,3 @@ ReAct agent with tools for memory queries and/or filesystem access.
 * [Letta Memory Benchmark](https://www.letta.com/blog/benchmarking-ai-agent-memory)
 
 * [Memory in the Age of AI Agents](https://arxiv.org/abs/2512.13564)
-
-asdfasdfa
-
-# asdfasdfasdf
-
-asdfads
-
-#### asdfasdfadsfa

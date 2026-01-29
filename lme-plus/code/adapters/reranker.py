@@ -1,10 +1,11 @@
 """
-Reranker Adapter: Two-stage BM25 → Cross-Encoder pipeline
+Reranker Adapter: Two-stage BM25 → Cross-Encoder pipeline with chunking.
 
 Stage 1: BM25 retrieves top-20 candidates (high recall)
-Stage 2: Cross-encoder reranks to top-3 (high precision)
+Stage 2: Cross-encoder reranks chunked sessions to top-3 (high precision)
 
-This addresses ICML reviewer concern about missing reranker baseline.
+Cross-encoder models have ~512 token limits, so sessions are chunked
+and the best-scoring chunk is used for each session.
 """
 import json
 import math
@@ -14,6 +15,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 from sentence_transformers import CrossEncoder
+
+CHUNK_SIZE = 400
+CHUNK_OVERLAP = 50
 
 
 class RerankerAdapter:
@@ -52,6 +56,25 @@ class RerankerAdapter:
             print(f"Loading cross-encoder model: {self.cross_encoder_model}...")
             self.cross_encoder = CrossEncoder(self.cross_encoder_model)
             print("Cross-encoder loaded.")
+
+    def _chunk_text(self, text: str) -> List[str]:
+        """Split text into ~400-token chunks with overlap."""
+        words = text.split()
+        words_per_chunk = int(CHUNK_SIZE * 1.3)
+        overlap_words = int(CHUNK_OVERLAP * 1.3)
+
+        if len(words) <= words_per_chunk:
+            return [text]
+
+        chunks = []
+        start = 0
+        while start < len(words):
+            end = min(start + words_per_chunk, len(words))
+            chunks.append(" ".join(words[start:end]))
+            start = end - overlap_words
+            if start >= len(words) - overlap_words:
+                break
+        return chunks
 
     def set_environment(self, env_dir: Path):
         """Set the current question environment and build BM25 index"""
@@ -148,23 +171,36 @@ class RerankerAdapter:
     def _cross_encoder_rerank(self, query: str, candidates: List[Tuple[int, float]],
                               top_k: int) -> List[Tuple[int, float, float]]:
         """
-        Stage 2: Cross-encoder reranking
+        Stage 2: Cross-encoder reranking with chunking.
+        Chunks each candidate session and takes max score per session.
 
         Returns: List of (idx, bm25_score, cross_encoder_score)
         """
         if not candidates:
             return []
 
-        # Prepare query-document pairs for cross-encoder
-        pairs = [(query, self.session_texts[idx]) for idx, _ in candidates]
+        # Chunk each candidate and prepare query-chunk pairs
+        all_pairs = []
+        chunk_to_candidate = []
+        for cand_idx, (session_idx, _) in enumerate(candidates):
+            chunks = self._chunk_text(self.session_texts[session_idx])
+            for chunk in chunks:
+                all_pairs.append((query, chunk))
+                chunk_to_candidate.append(cand_idx)
 
-        # Get cross-encoder scores
-        ce_scores = self.cross_encoder.predict(pairs, show_progress_bar=False)
+        # Get cross-encoder scores for all chunks
+        chunk_scores = self.cross_encoder.predict(all_pairs, show_progress_bar=False)
 
-        # Combine with original indices
+        # Get best chunk score for each candidate
+        candidate_ce_scores = [float('-inf')] * len(candidates)
+        for chunk_idx, score in enumerate(chunk_scores):
+            cand_idx = chunk_to_candidate[chunk_idx]
+            candidate_ce_scores[cand_idx] = max(candidate_ce_scores[cand_idx], float(score))
+
+        # Combine with original indices and BM25 scores
         reranked = [
-            (idx, bm25_score, float(ce_score))
-            for (idx, bm25_score), ce_score in zip(candidates, ce_scores)
+            (session_idx, bm25_score, candidate_ce_scores[cand_idx])
+            for cand_idx, (session_idx, bm25_score) in enumerate(candidates)
         ]
 
         # Sort by cross-encoder score (descending)

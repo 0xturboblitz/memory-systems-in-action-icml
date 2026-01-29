@@ -58,7 +58,8 @@ class ReActAgent:
                 model=self.model,
                 messages=messages,
                 tools=tools if tools else None,
-                tool_choice="auto" if tools else None
+                tool_choice="auto" if tools else None,
+                temperature=0.0
             )
 
             # Track usage

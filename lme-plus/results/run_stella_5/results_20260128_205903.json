@@ -1,0 +1,62 @@
+[
+  {
+    "question_id": "e47becba",
+    "question": "What degree did I graduate with?",
+    "gold_answer": "Business Administration",
+    "agent_answer": "I don't have enough information to answer that question.",
+    "correct": false,
+    "time_seconds": 12.565895795822144,
+    "tokens": 7019,
+    "cost_usd": 0.01775,
+    "tool_calls": 1,
+    "iterations": 2
+  },
+  {
+    "question_id": "51a45a95",
+    "question": "Where did I redeem a $5 coupon on coffee creamer?",
+    "gold_answer": "Target",
+    "agent_answer": "I don't have enough information to answer that question.",
+    "correct": false,
+    "time_seconds": 5.115434169769287,
+    "tokens": 8742,
+    "cost_usd": 0.0220875,
+    "tool_calls": 1,
+    "iterations": 2
+  },
+  {
+    "question_id": "58bf7951",
+    "question": "What play did I attend at the local community theater?",
+    "gold_answer": "The Glass Menagerie",
+    "agent_answer": "You attended a production of \"The Glass Menagerie\" at the local community theater.",
+    "correct": true,
+    "time_seconds": 11.128396987915039,
+    "tokens": 5216,
+    "cost_usd": 0.0133175,
+    "tool_calls": 1,
+    "iterations": 2
+  },
+  {
+    "question_id": "1e043500",
+    "question": "What is the name of the playlist I created on Spotify?",
+    "gold_answer": "Summer Vibes",
+    "agent_answer": "I don't have enough information to answer that question.",
+    "correct": false,
+    "time_seconds": 9.707319736480713,
+    "tokens": 8270,
+    "cost_usd": 0.020877499999999997,
+    "tool_calls": 1,
+    "iterations": 2
+  },
+  {
+    "question_id": "c5e8278d",
+    "question": "What was my last name before I changed it?",
+    "gold_answer": "Johnson",
+    "agent_answer": "I don't have enough information to answer that question.",
+    "correct": false,
+    "time_seconds": 16.02922487258911,
+    "tokens": 11377,
+    "cost_usd": 0.028652499999999994,
+    "tool_calls": 1,
+    "iterations": 2
+  }
+]

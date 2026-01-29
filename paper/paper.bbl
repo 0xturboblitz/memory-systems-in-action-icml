@@ -1,21 +1,18 @@
 \begin{thebibliography}{10}
 
-\bibitem{chen2024hindsight}
-Junda Chen, Yifan Wang, Shichun Liu, et~al.
-\newblock Hindsight is 20/20: Building agent memory that retains, recalls, and
-  reflects.
-\newblock {\em arXiv preprint arXiv:2512.12818}, 2024.
+\bibitem{bruch2022hybrid}
+Sebastian Bruch, Siyu Gai, and Amir Ingber.
+\newblock An analysis of fusion functions for hybrid retrieval.
+\newblock {\em arXiv preprint arXiv:2210.11934}, 2022.
 
 \bibitem{karpukhin2020dpr}
 Vladimir Karpukhin, Barlas O{\u{g}}uz, Sewon Min, et~al.
 \newblock Dense passage retrieval for open-domain question answering.
-\newblock {\em Conference on Empirical Methods in Natural Language Processing
-  (EMNLP)}, 2020.
+\newblock {\em Conference on Empirical Methods in Natural Language Processing (EMNLP)}, 2020.
 
 \bibitem{khattab2020colbert}
 Omar Khattab and Matei Zaharia.
-\newblock Colbert: Efficient and effective passage search via contextualized
-  late interaction over bert.
+\newblock Colbert: Efficient and effective passage search via contextualized late interaction over bert.
 \newblock {\em Special Interest Group on Information Retrieval (SIGIR)}, 2020.
 
 \bibitem{langchain}
@@ -23,21 +20,25 @@ LangChain.
 \newblock Langchain: Building applications with llms.
 \newblock \url{https://langchain.com}, 2023.
 
-\bibitem{letta2024}
-Letta.
-\newblock Benchmarking ai agent memory.
-\newblock \url{https://www.letta.com/blog/benchmarking-ai-agent-memory}, 2024.
+\bibitem{chen2025hindsight}
+Chris Latimer et~al.
+\newblock Hindsight is 20/20: Building agent memory that retains, recalls, and reflects.
+\newblock {\em arXiv preprint arXiv:2512.12818}, 2025.
 
-\bibitem{liu2024memory}
-Shichun Liu, Yifan Wang, Junda Chen, et~al.
+\bibitem{letta2025}
+Letta.
+\newblock Benchmarking ai agent memory: Is a filesystem all you need?
+\newblock \url{https://www.letta.com/blog/benchmarking-ai-agent-memory}, 2025.
+
+\bibitem{liu2025memory}
+Shichun Liu, Yuyang Hu, Yanwei Yue, et~al.
 \newblock Memory in the age of ai agents.
-\newblock {\em arXiv preprint arXiv:2512.13564}, 2024.
+\newblock {\em arXiv preprint arXiv:2512.13564}, 2025.
 
 \bibitem{maharana2024locomo}
 Adyasha Maharana and Mohit Bansal.
 \newblock Evaluating very long-term conversational memory of llm agents.
-\newblock {\em Annual Meeting of the Association for Computational Linguistics
-  (ACL)}, 2024.
+\newblock {\em Annual Meeting of the Association for Computational Linguistics (ACL)}, 2024.
 
 \bibitem{openai2023chatgpt}
 OpenAI.
@@ -51,35 +52,27 @@ Charles Packer, Vivian Fang, Shishir~G Patil, et~al.
 
 \bibitem{thakur2021beir}
 Nandan Thakur, Nils Reimers, Andreas R{\"u}ckl{\'e}, et~al.
-\newblock Beir: A heterogeneous benchmark for zero-shot evaluation of
-  information retrieval models.
+\newblock Beir: A heterogeneous benchmark for zero-shot evaluation of information retrieval models.
 \newblock {\em Neural Information Processing Systems (NeurIPS)}, 2021.
 
-\bibitem{wang2024memr3}
+\bibitem{wang2025memr3}
 Yifan Wang, Shichun Liu, Junda Chen, et~al.
 \newblock Memr3: Memory retrieval via reflective reasoning for llm agents.
-\newblock {\em arXiv preprint arXiv:2512.20237}, 2024.
+\newblock {\em arXiv preprint arXiv:2512.20237}, 2025.
 
 \bibitem{wu2024longmemeval}
 Xiaowu Wu, Yifan Wang, Yuheng Zhao, Junda Chen, et~al.
-\newblock Longmemeval: Benchmarking chat assistants on long-term interactive
-  memory.
+\newblock Longmemeval: Benchmarking chat assistants on long-term interactive memory.
 \newblock {\em arXiv preprint arXiv:2410.10813}, 2024.
 
 \bibitem{yao2023react}
 Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, et~al.
 \newblock React: Synergizing reasoning and acting in language models.
-\newblock {\em International Conference on Learning Representations (ICLR)},
-  2023.
+\newblock {\em International Conference on Learning Representations (ICLR)}, 2023.
 
 \bibitem{stella2024}
 Dun Zhang.
-\newblock Stella: Efficient multi-task dense retrieval.
-\newblock 2024.
-
-\bibitem{zhou2024hybrid}
-Wei Zhou, Li~Zhang, Ming Wang, et~al.
-\newblock A systematic review of retrieval-augmented generation systems.
-\newblock {\em arXiv preprint arXiv:2507.18910}, 2024.
+\newblock Stella en 1.5b v5: Efficient multi-task dense retrieval.
+\newblock \url{https://huggingface.co/dunzhang/stella_en_1.5B_v5}, 2024.
 
 \end{thebibliography}

@@ -1,0 +1,255 @@
+Loaded 50 questions
+
+[1/50] Question: e47becba
+  Answer: You graduated with a degree in Business Administration.
+  Correct: True
+  Time: 2.4s, Tokens: 10078, Cost: $0.0254
+
+[2/50] Question: 51a45a95
+  Answer: You redeemed a $5 coupon on coffee creamer last Sunday, which you discovered in your email inbox.
+  Correct: False
+  Time: 2.4s, Tokens: 8631, Cost: $0.0219
+
+[3/50] Question: 58bf7951
+  Answer: You attended a production of "The Glass Menagerie" at the local community theater.
+  Correct: True
+  Time: 1.3s, Tokens: 4400, Cost: $0.0113
+
+[4/50] Question: 1e043500
+  Answer: The name of the playlist you created on Spotify is "Summer Vibes."
+  Correct: True
+  Time: 1.6s, Tokens: 3163, Cost: $0.0082
+
+[5/50] Question: c5e8278d
+  Answer: Your last name before you changed it was Johnson.
+  Correct: True
+  Time: 1.6s, Tokens: 8862, Cost: $0.0224
+
+[6/50] Question: 6ade9755
+  Answer: I don't have enough information to answer that question.
+  Correct: False
+  Time: 3.0s, Tokens: 6711, Cost: $0.0170
+
+[7/50] Question: 6f9b354f
+  Answer: You repainted your bedroom walls a lighter shade of gray.
+  Correct: True
+  Time: 2.8s, Tokens: 9728, Cost: $0.0246
+
+[8/50] Question: 58ef2f1c
+  Answer: You volunteered at the "Love is in the Air" fundraising dinner on Valentine's Day.
+  Correct: True
+  Time: 1.9s, Tokens: 8562, Cost: $0.0217
+
+[9/50] Question: f8c5f88b
+  Answer: You mentioned that you bought your new tennis racket from a sports store downtown.
+  Correct: True
+  Time: 2.4s, Tokens: 8569, Cost: $0.0217
+
+[10/50] Question: 5d3d2817
+  Answer: Your previous occupation was a marketing specialist at a small startup.
+  Correct: True
+  Time: 2.1s, Tokens: 7673, Cost: $0.0194
+
+[11/50] Question: 7527f7e2
+  Answer: You mentioned that you spent $800 on a designer handbag.
+  Correct: True
+  Time: 2.4s, Tokens: 8115, Cost: $0.0205
+
+[12/50] Question: c960da58
+  Answer: You have 20 playlists on Spotify.
+  Correct: True
+  Time: 2.0s, Tokens: 9854, Cost: $0.0248
+
+[13/50] Question: 3b6f954b
+  Answer: You attended the University of Melbourne for your study abroad program.
+  Correct: True
+  Time: 2.7s, Tokens: 7357, Cost: $0.0186
+
+[14/50] Question: 726462e0
+  Answer: You received a 10% discount on your first purchase from the new clothing brand.
+  Correct: True
+  Time: 2.3s, Tokens: 9395, Cost: $0.0238
+
+[15/50] Question: 94f70d80
+  Answer: You mentioned that it took you 4 hours to assemble the IKEA bookshelf.
+  Correct: True
+  Time: 2.1s, Tokens: 3384, Cost: $0.0087
+
+[16/50] Question: 66f24dbb
+  Answer: For your sister's birthday, you bought her a yellow dress and a pair of earrings to match.
+  Correct: False
+  Time: 2.6s, Tokens: 7685, Cost: $0.0195
+
+[17/50] Question: ad7109d1
+  Answer: Your new internet plan speed is 500 Mbps.
+  Correct: True
+  Time: 1.8s, Tokens: 6875, Cost: $0.0174
+
+[18/50] Question: af8d2e46
+  Answer: You packed 7 shirts for your 5-day trip to Costa Rica. However, you mentioned that you only ended up wearing 3 of them.
+  Correct: True
+  Time: 2.7s, Tokens: 8594, Cost: $0.0219
+
+[19/50] Question: dccbc061
+  Answer: Your previous stance on spirituality was that you were a staunch atheist. However, you mentioned that you have been exploring other possibilities, including reading a lot about Buddhism, which represents a significant shift from your earlier views.
+  Correct: False
+  Time: 3.3s, Tokens: 9105, Cost: $0.0232
+
+[20/50] Question: c8c3f81d
+  Answer: Your favorite brand for running shoes is Nike.
+  Correct: True
+  Time: 1.6s, Tokens: 7288, Cost: $0.0184
+
+[21/50] Question: 8ebdbe50
+  Answer: Last month, you completed a certification in Data Science.
+  Correct: True
+  Time: 2.1s, Tokens: 11022, Cost: $0.0278
+
+[22/50] Question: 6b168ec8
+  Answer: You own three bikes: a road bike, a mountain bike, and a commuter bike.
+  Correct: True
+  Time: 2.1s, Tokens: 8536, Cost: $0.0216
+
+[23/50] Question: 75499fd8
+  Answer: I don't have enough information to answer that question.
+  Correct: False
+  Time: 2.6s, Tokens: 3300, Cost: $0.0084
+
+[24/50] Question: 21436231
+  Answer: On your last fishing trip to Lake Michigan, you caught 12 largemouth bass.
+  Correct: True
+  Time: 2.4s, Tokens: 8876, Cost: $0.0225
+
+[25/50] Question: 95bcc1c8
+  Answer: You watched 10 amateur comedians perform at the open mic night.
+  Correct: True
+  Time: 2.2s, Tokens: 8885, Cost: $0.0225
+
+[26/50] Question: 853b0a1d
+  Answer: You were 18 years old when your grandma gave you the silver necklace.
+  Correct: True
+  Time: 1.8s, Tokens: 7700, Cost: $0.0195
+
+[27/50] Question: a06e4cfe
+  Answer: Your preferred gin-to-vermouth ratio for a classic gin martini is 3:1, with a dash of citrus bitters.
+  Correct: False
+  Time: 4.6s, Tokens: 10133, Cost: $0.0257
+
+[28/50] Question: 37d43f65
+  Answer: You upgraded your laptop's RAM to 16GB.
+  Correct: True
+  Time: 2.4s, Tokens: 9930, Cost: $0.0251
+
+[29/50] Question: b86304ba
+  Answer: The painting of a sunset you purchased is worth triple the amount you paid for it.
+  Correct: True
+  Time: 2.4s, Tokens: 9786, Cost: $0.0247
+
+[30/50] Question: d52b4f67
+  Answer: You attended your cousin's wedding at the Grand Ballroom.
+  Correct: True
+  Time: 2.0s, Tokens: 7310, Cost: $0.0185
+
+[31/50] Question: 25e5aa4f
+  Answer: You completed your Bachelor's degree in Computer Science from UCLA.
+  Correct: True
+  Time: 2.3s, Tokens: 10063, Cost: $0.0254
+
+[32/50] Question: caf9ead2
+  Answer: It took you and your friends around 5 hours to move everything into the new apartment.
+  Correct: True
+  Time: 2.3s, Tokens: 5299, Cost: $0.0136
+
+[33/50] Question: 8550ddae
+  Answer: I found a conversation where you mentioned trying a lavender gin fizz recipe last weekend. You improvised with honey and water because you didn't have simple syrup. If this is the cocktail you were referring to, it seems you were experimenting with lavender in your cocktails.
+  Correct: True
+  Time: 3.9s, Tokens: 10174, Cost: $0.0260
+
+[34/50] Question: 60d45044
+  Answer: Your favorite type of rice is Japanese short-grain rice.
+  Correct: True
+  Time: 2.5s, Tokens: 9867, Cost: $0.0249
+
+[35/50] Question: 3f1e9474
+  Answer: You had a conversation about destiny with your friend Sarah. She mentioned that "everything happens for a reason," which got you thinking about your own beliefs on destiny.
+  Correct: True
+  Time: 2.4s, Tokens: 10254, Cost: $0.0260
+
+[36/50] Question: 86b68151
+  Answer: You bought your new bookshelf from IKEA.
+  Correct: True
+  Time: 2.1s, Tokens: 7730, Cost: $0.0195
+
+[37/50] Question: 577d4d32
+  Answer: You mentioned in a previous conversation that you aim to stop checking work emails and messages by 7 pm to help separate your work and personal life.
+  Correct: True
+  Time: 2.1s, Tokens: 7925, Cost: $0.0202
+
+[38/50] Question: ec81a493
+  Answer: I found a session where you mentioned that your favorite artist's debut album is a limited edition of only 500 copies worldwide.
+  Correct: True
+  Time: 2.5s, Tokens: 9775, Cost: $0.0248
+
+[39/50] Question: e01b8e2f
+  Answer: You went on a week-long trip with your family to Hawaii last month. You mentioned that you loved it so much and were considering going back.
+  Correct: True
+  Time: 2.3s, Tokens: 9997, Cost: $0.0254
+
+[40/50] Question: bc8a6e93
+  Answer: You baked a lemon blueberry cake for your niece's birthday party. It was a huge hit, and you mentioned that the combination of the tangy lemon and sweet blueberries was perfect.
+  Correct: True
+  Time: 2.8s, Tokens: 9870, Cost: $0.0251
+
+[41/50] Question: ccb36322
+  Answer: I don't have enough information to answer that question.
+  Correct: False
+  Time: 3.8s, Tokens: 3088, Cost: $0.0080
+
+[42/50] Question: b320f3f8
+  Answer: You bought a rare blue Snaggletooth action figure from a thrift store.
+  Correct: True
+  Time: 2.7s, Tokens: 6883, Cost: $0.0175
+
+[43/50] Question: 4fd1909e
+  Answer: You attended the Imagine Dragons concert at the Xfinity Center on June 15th.
+  Correct: True
+  Time: 1.9s, Tokens: 5325, Cost: $0.0136
+
+[44/50] Question: 545bd2b5
+  Answer: I found a conversation where you mentioned that you've been averaging around 2 hours of screen time on Instagram per day for the past two weeks. You were considering setting a time limit of 30 minutes per day to reduce your usage.
+  Correct: True
+  Time: 3.9s, Tokens: 10539, Cost: $0.0268
+
+[45/50] Question: 8a137a7f
+  Answer: You mentioned using a Philips LED bulb in your bedside lamp.
+  Correct: True
+  Time: 2.1s, Tokens: 10187, Cost: $0.0257
+
+[46/50] Question: 76d63226
+  Answer: Your new Samsung TV is a 55-inch 4K smart TV.
+  Correct: True
+  Time: 1.6s, Tokens: 5919, Cost: $0.0150
+
+[47/50] Question: 86f00804
+  Answer: You are currently reading "The Seven Husbands of Evelyn Hugo."
+  Correct: True
+  Time: 2.5s, Tokens: 3486, Cost: $0.0090
+
+[48/50] Question: 8e9d538c
+  Answer: You found a stash of 17 skeins of worsted weight yarn.
+  Correct: True
+  Time: 1.9s, Tokens: 8954, Cost: $0.0227
+
+[49/50] Question: 311778f1
+  Answer: I don't have enough information to answer that question.
+  Correct: False
+  Time: 3.8s, Tokens: 14978, Cost: $0.0377
+
+[50/50] Question: c19f7a0b
+  Answer: You usually get home from work around 6:30 pm on weekdays.
+  Correct: True
+  Time: 1.7s, Tokens: 7756, Cost: $0.0197
+
+============================================================
+Results saved to results/run_bm25_50/results_20260128_175956.json
+Summary: Accuracy=84.00%, Cost=$1.03
