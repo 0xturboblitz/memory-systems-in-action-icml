@@ -225,8 +225,8 @@ class RerankerAdapter:
                             },
                             "top_k": {
                                 "type": "integer",
-                                "description": "Number of top sessions to return (default: 3)",
-                                "default": 3
+                                "description": "Number of top sessions to return (default: 5)",
+                                "default": 5
                             }
                         },
                         "required": ["query"]
@@ -238,12 +238,12 @@ class RerankerAdapter:
     def execute_tool(self, function_name: str, args: Dict[str, Any]) -> str:
         """Execute a tool call"""
         if function_name == "search_memory":
-            top_k = args.get("top_k", 3)
+            top_k = args.get("top_k", 5)
             return self._search_memory(args["query"], top_k)
         else:
             return f"Unknown function: {function_name}"
 
-    def _search_memory(self, query: str, top_k: int = 3) -> str:
+    def _search_memory(self, query: str, top_k: int = 5) -> str:
         """Two-stage retrieval: BM25 → cross-encoder"""
         if not self.env_dir or len(self.session_tokens) == 0:
             return "Error: Environment not set"

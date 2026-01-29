@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex paper"] 1769648180.57175 "paper.aux" "paper.bbl" "paper" 1769648182.56206 0
-  "./refs.bib" 1769648167.2612 3406 dd509d89bfa0b1c3418200c0f0a1de8a ""
+["bibtex paper"] 1769670246.52985 "paper.aux" "paper.bbl" "paper" 1769670248.88218 0
+  "./refs.bib" 1769670210.16157 4174 64bd307a67a9261b148d28f7505ec25b ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "paper.aux" 1769648182.20135 7514 ebcafb6d33df269523d8389212e25700 "pdflatex"
+  "paper.aux" 1769670248.41686 7726 db355b6e96c5a66245155f5836687a0a "pdflatex"
   (generated)
   "paper.bbl"
   "paper.blg"
   (rewritten before read)
-["pdflatex"] 1769648180.69326 "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/paper/paper.tex" "paper.pdf" "paper" 1769648182.5622 0
-  "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/paper/paper.tex" 1769648177.28157 19667 9e466939af8f87f23217cf07f4325391 ""
+["pdflatex"] 1769670246.65882 "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/paper/paper.tex" "paper.pdf" "paper" 1769670248.88237 0
+  "/Users/turboblitz/code/my-code/memory-systems-in-action-icml/paper/paper.tex" 1769670243.37483 20300 bcfa74f9493a5e75247f34c69fe279fc ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -134,10 +134,10 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "figures/cost_accuracy_tradeoff.png" 1769643313.57685 102526 e1bf7bb4a424269c16dfb6173d0709c8 ""
   "figures/per_question_heatmap.png" 1769643313.57731 49745 629f4b1537657ff2ffff8ba42f42c88c ""
-  "paper.aux" 1769648182.20135 7514 ebcafb6d33df269523d8389212e25700 "pdflatex"
-  "paper.bbl" 1769648180.69017 3055 6b8afb4120af3c190a6b208c5cece702 "bibtex paper"
-  "paper.out" 1769648182.20224 2467 5e6fa607d43dbd8128ab2e4bb0ac14f1 "pdflatex"
-  "paper.tex" 1769648177.28157 19667 9e466939af8f87f23217cf07f4325391 ""
+  "paper.aux" 1769670248.41686 7726 db355b6e96c5a66245155f5836687a0a "pdflatex"
+  "paper.bbl" 1769670246.65609 3715 b6f656ffda7f1e79c1564875e8ee0dec "bibtex paper"
+  "paper.out" 1769670248.41773 2467 5e6fa607d43dbd8128ab2e4bb0ac14f1 "pdflatex"
+  "paper.tex" 1769670243.37483 20300 bcfa74f9493a5e75247f34c69fe279fc ""
   (generated)
   "paper.aux"
   "paper.log"

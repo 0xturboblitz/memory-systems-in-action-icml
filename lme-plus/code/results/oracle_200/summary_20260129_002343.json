@@ -1,0 +1,11 @@
+{
+  "memory_type": "oracle",
+  "filesystem_enabled": false,
+  "num_questions": 200,
+  "accuracy": 0.715,
+  "avg_time_seconds": 3.8492478001117707,
+  "avg_tokens": 10492.955,
+  "total_cost_usd": 5.3649625,
+  "avg_iterations": 2.145,
+  "timestamp": "20260129_002343"
+}

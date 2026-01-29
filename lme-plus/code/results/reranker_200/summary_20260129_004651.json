@@ -1,0 +1,11 @@
+{
+  "memory_type": "reranker",
+  "filesystem_enabled": false,
+  "num_questions": 200,
+  "accuracy": 0.575,
+  "avg_time_seconds": 10.651591563224793,
+  "avg_tokens": 18963.445,
+  "total_cost_usd": 9.5939,
+  "avg_iterations": 2.09,
+  "timestamp": "20260129_004651"
+}

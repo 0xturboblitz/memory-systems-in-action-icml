@@ -5,6 +5,11 @@ Sebastian Bruch, Siyu Gai, and Amir Ingber.
 \newblock An analysis of fusion functions for hybrid retrieval.
 \newblock {\em arXiv preprint arXiv:2210.11934}, 2022.
 
+\bibitem{hu2025memoryagentbench}
+Yuanzhe Hu, Yu~Wang, and Julian McAuley.
+\newblock Evaluating memory in llm agents via incremental multi-turn interactions.
+\newblock {\em arXiv preprint arXiv:2507.05257}, 2025.
+
 \bibitem{karpukhin2020dpr}
 Vladimir Karpukhin, Barlas O{\u{g}}uz, Sewon Min, et~al.
 \newblock Dense passage retrieval for open-domain question answering.
@@ -50,6 +55,11 @@ Charles Packer, Vivian Fang, Shishir~G Patil, et~al.
 \newblock Memgpt: Towards llms as operating systems.
 \newblock {\em arXiv preprint arXiv:2310.08560}, 2023.
 
+\bibitem{robertson2009bm25}
+Stephen Robertson and Hugo Zaragoza.
+\newblock The probabilistic relevance framework: Bm25 and beyond.
+\newblock {\em Foundations and Trends in Information Retrieval}, 3(4):333--389, 2009.
+
 \bibitem{thakur2021beir}
 Nandan Thakur, Nils Reimers, Andreas R{\"u}ckl{\'e}, et~al.
 \newblock Beir: A heterogeneous benchmark for zero-shot evaluation of information retrieval models.
@@ -64,6 +74,11 @@ Yifan Wang, Shichun Liu, Junda Chen, et~al.
 Xiaowu Wu, Yifan Wang, Yuheng Zhao, Junda Chen, et~al.
 \newblock Longmemeval: Benchmarking chat assistants on long-term interactive memory.
 \newblock {\em arXiv preprint arXiv:2410.10813}, 2024.
+
+\bibitem{xu2025amem}
+Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang.
+\newblock A-mem: Agentic memory for llm agents.
+\newblock {\em Advances in Neural Information Processing Systems (NeurIPS)}, 2025.
 
 \bibitem{yao2023react}
 Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, et~al.

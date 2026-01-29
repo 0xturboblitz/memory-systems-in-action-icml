@@ -129,6 +129,13 @@ def run_evaluation(args):
         print(f"  Correct: {is_correct}")
         print(f"  Time: {elapsed_time:.1f}s, Tokens: {trace['total_tokens']}, Cost: ${trace['total_cost']:.4f}")
 
+        # Save incrementally every 10 questions
+        if len(results) % 10 == 0:
+            partial_file = output_dir / f"results_partial.json"
+            with open(partial_file, 'w') as f:
+                json.dump(results, f, indent=2)
+            print(f"  [Saved {len(results)} results to {partial_file}]")
+
     # Save results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     results_file = output_dir / f"results_{timestamp}.json"

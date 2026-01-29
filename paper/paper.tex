@@ -73,13 +73,13 @@ Our contributions are:
 \label{sec:related}
 
 \paragraph{Memory Benchmarks for Agents.}
-LongMemEval \cite{wu2024longmemeval} evaluates retrieval systems on conversational QA, finding Stella V5 dense embeddings achieve 71\% accuracy with top-5 retrieval in static settings. LoCoMo \cite{maharana2024locomo} presents very long-term conversations (300 turns, 9K tokens) testing information extraction, temporal reasoning, and multi-session reasoning. Letta's evaluation \cite{letta2025} found that gpt-4o-mini with file-based context management (storing conversations as files) achieves 74\% on LoCoMo's structured extraction tasks, suggesting memory management strategies matter beyond retrieval mechanisms alone. Our work tests whether static retrieval performance (LongMemEval's 71\% with embeddings) translates to agentic settings where agents iteratively query memory tools.
+LongMemEval \cite{wu2024longmemeval} evaluates retrieval systems on conversational QA, finding Stella V5 dense embeddings achieve 71\% accuracy with top-5 retrieval in static settings. LoCoMo \cite{maharana2024locomo} presents very long-term conversations (300 turns, 9K tokens) testing information extraction, temporal reasoning, and multi-session reasoning. MemoryAgentBench \cite{hu2025memoryagentbench} provides a unified benchmark evaluating four core memory competencies: accurate retrieval, test-time learning, long-range understanding, and conflict resolution. Letta's evaluation \cite{letta2025} found that gpt-4o-mini with file-based context management achieves 74\% on LoCoMo's structured extraction tasks, suggesting memory management strategies matter beyond retrieval mechanisms alone. Our work tests whether static retrieval performance translates to agentic settings where agents iteratively query memory tools.
 
 \paragraph{Dense vs Sparse Retrieval.}
-Dense retrievers \cite{karpukhin2020dpr, khattab2020colbert} typically outperform BM25 on static benchmarks \cite{thakur2021beir}. Stella V5 \cite{stella2024} achieves state-of-the-art performance on MTEB. Recent work on hybrid retrieval \cite{bruch2022hybrid} combines dense and sparse methods, typically improving over single-method baselines through fusion techniques like Reciprocal Rank Fusion. Our work shows this ranking reverses when retrieval is agentic, with dense embeddings underperforming simple keyword search.
+Dense retrievers \cite{karpukhin2020dpr, khattab2020colbert} typically outperform BM25 \cite{robertson2009bm25} on static benchmarks \cite{thakur2021beir}. Stella V5 \cite{stella2024} achieves state-of-the-art performance on MTEB. Recent work on hybrid retrieval \cite{bruch2022hybrid} combines dense and sparse methods through fusion techniques like Reciprocal Rank Fusion (RRF) and convex combination, with convex fusion often outperforming cascade approaches. Our hybrid implementation uses cascade reranking; alternative fusion strategies may yield different results. Our work shows the dense-vs-sparse ranking reverses when retrieval is agentic.
 
 \paragraph{Agent Memory Systems.}
-MemGPT \cite{packer2023memgpt} uses hierarchical memory with embedding-based retrieval. Liu et al.~\cite{liu2025memory} provide a comprehensive survey distinguishing agent memory from RAG and context engineering. Recent systems like MemR3 \cite{wang2025memr3} use reflective reasoning to decide when to retrieve from long-term memory, while Hindsight \cite{chen2025hindsight} proposes retain/recall/reflect mechanisms for very long conversations. Our work empirically evaluates whether sophisticated retrieval mechanisms (dense embeddings, hybrid approaches) outperform simple keyword search when used by agentic systems.
+MemGPT \cite{packer2023memgpt} uses hierarchical memory with embedding-based retrieval. Liu et al.~\cite{liu2025memory} provide a comprehensive survey organizing memory systems across forms (token-level, parametric, latent), functions (factual, experiential, working), and dynamics (formation, evolution, retrieval). A-MEM \cite{xu2025amem} introduces dynamic memory organization using Zettelkasten principles, automatically linking related memories with structured attributes. Recent systems like MemR3 \cite{wang2025memr3} use reflective reasoning to decide when to retrieve from long-term memory, while Hindsight \cite{chen2025hindsight} proposes retain/recall/reflect mechanisms for very long conversations. Our work empirically evaluates whether sophisticated retrieval mechanisms (dense embeddings, hybrid approaches) outperform simple keyword search when used by agentic systems.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % METHOD
@@ -104,17 +104,17 @@ All adapters expose a single \texttt{search\_memory(query)} tool:
 
 \paragraph{Oracle.} Returns gold answer session(s) from metadata. Establishes upper bound.
 
-\paragraph{Keyword (BM25).} Scores sessions by BM25:
-$$\text{score}(s, q) = \sum_{w \in q} \text{count}(w, s)$$
-where $w$ are lowercased tokens from $q$ after removing punctuation. No stop word removal, stemming, or IDF weighting is applied. Returns top-3 by score.
+\paragraph{Keyword (BM25).} Scores sessions using BM25 \cite{robertson2009bm25}:
+$$\text{BM25}(s, q) = \sum_{w \in q} \text{IDF}(w) \cdot \frac{f(w, s) \cdot (k_1 + 1)}{f(w, s) + k_1 \cdot (1 - b + b \cdot |s|/\text{avgdl})}$$
+with $k_1 = 1.2$, $b = 0.75$, IDF weighting, and document length normalization. Tokens are lowercased with punctuation removed. Returns top-5 by score.
 
 \paragraph{Stella V5 (Dense).} Embeds sessions with \texttt{dunzhang/stella\_en\_1.5B\_v5}:
 $$\text{score}(s, q) = \cos(\text{embed}(s), \text{embed}(q))$$
-Returns top-3 by cosine similarity.
+Returns top-5 by cosine similarity.
 
 \paragraph{Filesystem.} Exposes \texttt{list\_sessions}, \texttt{read\_session(idx)}, \texttt{search\_sessions(keywords)} tools.
 
-\paragraph{Hybrid.} Keyword search for top-10 candidates, rerank by embeddings to top-3.
+\paragraph{Hybrid.} Keyword search for top-10 candidates, rerank by embeddings to top-5.
 
 \subsection{Evaluation Protocol}
 
@@ -200,7 +200,7 @@ Our results suggest: (1) Prioritize keyword search over dense embeddings for con
 Our negative results don't imply embeddings never work. Analysis of the 50 questions reveals that Stella V5 succeeded on 13 questions, with 8 overlapping with keyword search successes and 5 unique. The 5 unique successes involved paraphrased queries (e.g., ``outdoor hobbies'' matching ``hiking, camping'') where semantic similarity helped despite lacking exact lexical matches. This suggests embeddings may provide value for: (1) Paraphrased or conceptual queries requiring semantic generalization; (2) Multi-session reasoning requiring thematic similarity; (3) Domains with high linguistic variation. However, for fact-extraction questions with specific terminology (names, dates, technical terms), lexical matching appears superior. Recent work on hybrid retrieval \cite{bruch2022hybrid} shows convex combination fusion outperforms Reciprocal Rank Fusion in both in-domain and out-of-domain settings, suggesting our cascade-based hybrid implementation may be suboptimal. Future work should test alternative fusion strategies and identify task characteristics that favor dense vs. sparse retrieval.
 
 \paragraph{Limitations.}
-Our study has several key limitations: (1) \textbf{Sample size}: 50/500 questions (10\%) yields wide confidence intervals ($\pm 13$pp at 60\% accuracy); statistical power is limited for detecting smaller effects. (2) \textbf{Keyword search implementation}: We use frequency counting, not full BM25 with IDF weighting and length normalization; proper BM25 typically improves performance by 5-15\%. (3) \textbf{Single embedding model}: Only Stella V5 tested; findings may not generalize to other dense retrievers (BGE, E5, Jina). (4) \textbf{Single dataset}: Personal assistant conversations from LongMemEval; results may differ on technical/scientific domains. (5) \textbf{Single agent architecture}: ReAct with 5 iterations; other architectures or longer iteration budgets may yield different results. (6) \textbf{Single LLM}: GPT-4o for both agent and judge; performance may vary with Claude, Gemini, or open-source models. Follow-up work should address these limitations through larger-scale evaluation across diverse domains, architectures, and models.
+Our study has several key limitations: (1) \textbf{Sample size}: 50/500 questions (10\%) yields wide confidence intervals ($\pm 13$pp at 60\% accuracy); statistical power is limited for detecting smaller effects. (2) \textbf{Keyword search implementation}: We use standard BM25 with IDF weighting and length normalization ($k_1=1.2$, $b=0.75$); alternative parameter tuning or stop word removal could affect results. (3) \textbf{Single embedding model}: Only Stella V5 tested; findings may not generalize to other dense retrievers (BGE, E5, Jina). (4) \textbf{Single dataset}: Personal assistant conversations from LongMemEval; results may differ on technical/scientific domains. (5) \textbf{Single agent architecture}: ReAct with 5 iterations; other architectures or longer iteration budgets may yield different results. (6) \textbf{Single LLM}: GPT-4o for both agent and judge; performance may vary with Claude, Gemini, or open-source models. Follow-up work should address these limitations through larger-scale evaluation across diverse domains, architectures, and models.
 
 \paragraph{Future Work.}
 Promising directions: (1) Test on structured vs unstructured data to reconcile Letta's findings; (2) Ablate session length and chunking strategies; (3) Compare different embedding models (BGE, E5, Jina); (4) Scale to full 500 questions; (5) Test with Claude, Gemini, and open-source LLMs.
@@ -213,7 +213,7 @@ Promising directions: (1) Test on structured vs unstructured data to reconcile L
 
 We introduced LME+, an agentic memory benchmark, and discovered that \textbf{keyword search (62\%) vastly outperforms dense embeddings (26\%)} for conversational memory---contrary to static benchmark results. Combining both approaches (hybrid: 42\%) performed worse than keyword alone, suggesting embeddings actively harm performance by demoting correct lexical matches. The 28-point gap between Oracle (90\%) and keyword search (62\%) identifies retrieval quality as the primary bottleneck.
 
-\textbf{Practical recommendation}: Use simple keyword search (BM25-style) for agentic memory systems. Dense embeddings, despite their success on static benchmarks, may actively hurt performance in dynamic agentic settings.
+\textbf{Practical recommendation}: Use BM25 for agentic memory systems. Dense embeddings, despite their success on static benchmarks, may actively hurt performance in dynamic agentic settings.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % REFERENCES

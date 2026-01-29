@@ -1,0 +1,11 @@
+{
+  "memory_type": "bm25",
+  "filesystem_enabled": false,
+  "num_questions": 200,
+  "accuracy": 0.575,
+  "avg_time_seconds": 4.511033388376236,
+  "avg_tokens": 19238.805,
+  "total_cost_usd": 9.72087,
+  "avg_iterations": 2.155,
+  "timestamp": "20260129_002608"
+}

@@ -1,0 +1,11 @@
+{
+  "memory_type": "builtin_mcp",
+  "filesystem_enabled": false,
+  "num_questions": 200,
+  "accuracy": 0.585,
+  "avg_time_seconds": 5.267030616998673,
+  "avg_tokens": 20076.27,
+  "total_cost_usd": 10.1527125,
+  "avg_iterations": 2.195,
+  "timestamp": "20260129_002847"
+}
